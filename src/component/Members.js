@@ -1,8 +1,6 @@
-import React from "react";
-
 export default function Members({ member, onDelete }) {
   function handleDeleteClick() {
-      onDelete(member.id)
+    onDelete(member.id);
   }
   return (
     <div>

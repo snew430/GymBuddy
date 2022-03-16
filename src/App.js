@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import MemberList from "./component/MemberList";
 import { v4 as uuidv4 } from "uuid";
+import Header from "./component/Header";
+import Nav from "./component/Nav";
+import Button from "./component/Button";
 
 const LOCAL_STORAGE_KEY = "gymbuddyApp.members";
 
@@ -24,7 +27,7 @@ export default function App() {
     setMembers(newMembers);
   }
 
-  function handleAddMamber(e) {
+  function handleAddMember(e) {
     const name = memberRef.current.value;
     if (name === "") return;
     setMembers((oldData) => {
@@ -39,14 +42,25 @@ export default function App() {
   }
 
   return (
-    <div style={{background: 'grey', padding: "10px"}}>
+    <div style={bodyStyle}>
+      <Header />
+      <Nav />
       <input ref={memberRef} type="text" />
-      <button style={{width: "140px", height:"150px", margin: "20px"}} onClick={handleAddMamber}>Add Member</button>
-  
+      <Button name="Add Member" event={handleAddMember} />
+
       <div>{members.length} members</div>
       <MemberList members={members} onDelete={onDelete} />
-      <button onClick={handleDeleteMember}>Delete Member(s)</button>
+      <Button name="Delete Member" event={handleDeleteMember} />
     </div>
   );
 }
+
+const bodyStyle = {
+  background: "grey",
+  padding: "10px",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+};
+
 // props and states - useState hook REACT
